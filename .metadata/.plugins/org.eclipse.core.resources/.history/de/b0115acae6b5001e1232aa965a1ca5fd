@@ -1,0 +1,70 @@
+package com.satya.Service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.satya.Model.User;
+import com.satya.Repository.UserRepository;
+
+@Service
+public class UserServiceImplementation  implements UserService{
+	
+	@Autowired
+	UserRepository userRepo;
+	
+
+	@Override
+	public User registerUser(User user) {
+
+		User newUser = new User();
+		newUser.setFirstName(user.getFirstName());
+		newUser.setLastName(user.getLastName());
+		newUser.setEmail(user.getEmail());
+		newUser.setPassword(user.getPassword());
+		newUser.setId(user.getId());
+		
+		User savedUser =userRepo.save(newUser);
+		
+		return savedUser;
+	}
+
+	@Override
+	public User findUserById(int id) throws Exception {
+		Optional<User> user = userRepo.findById(id);
+		
+		if(user.isPresent())
+		{
+			return user.get();
+		}
+		
+		throw new Exception("user is not exist with Id: "+ id);
+	}
+
+	@Override
+	public User findUserByEmail(String email) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public User followUser(int userid1, int userid2) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public User updateUser(User user) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<User> searchUser(String query) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

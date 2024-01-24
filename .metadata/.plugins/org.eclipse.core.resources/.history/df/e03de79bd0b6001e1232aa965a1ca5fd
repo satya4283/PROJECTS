@@ -1,0 +1,31 @@
+package com.satya.Service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.satya.Model.Book;
+import com.satya.Repository.BookRepository;
+
+public class BookServiceImplementation implements BookService{
+	
+	@Autowired
+	private BookRepository bookRepo;
+
+	@Override
+	public Book registerBook(Book book) {
+
+		 Book newBook = new Book();
+		 
+		 newBook.setAuthor(book.getAuthor());
+		 newBook.setBookDes(book.getBookDes());
+		 newBook.setBookImgUrl(book.getBookImgUrl());
+		 newBook.setBookPdfUrl(book.getBookPdfUrl());
+		 newBook.setTitle(book.getTitle());
+		 
+		 Book savedBook = bookRepo.save(newBook);
+		
+		return savedBook;
+	}
+	
+	
+
+}
